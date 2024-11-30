@@ -1,0 +1,128 @@
+services:
+  apache_server:
+    image: httpd:2.4
+    container_name: apache_server
+    volumes:
+      - ./html/apache:/usr/local/apache2/htdocs/
+      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+    networks:
+      - webnet
+    ports:
+      - "8081:80"
+
+  nginx_server:
+    image: nginx:1.21
+    container_name: nginx_server
+    volumes:
+      - ./html/nginx:/usr/share/nginx/html
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - webnet
+    ports:
+      - "8082:80"
+
+  varnish_server:
+    image: varnish:7.5.0
+    container_name: varnish_server
+    depends_on:
+      - apache_server
+      - nginx_server
+    volumes:
+      - ./varnish/default.vcl:/etc/varnish/default.vcl
+      - varnish_storage:/var/lib/varnish
+    ports:
+      - "8080:80"
+    networks:
+      - webnet
+    command: ["-F", "-f", "/etc/varnish/default.vcl"]
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - webnet
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - webnet
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    ports:
+      - "8085:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - webnet
+
+  apache_exporter:
+    image: bitnami/apache-exporter:latest
+    container_name: apache_exporter
+    environment:
+      - APACHE_STATUS_URI=http://apache_server/server-status?auto
+    ports:
+      - "9117:9117"
+    depends_on:
+      - apache_server
+    networks:
+      - webnet
+    command: ["--scrape_uri=http://apache_server/server-status?auto"]
+
+  nginx_exporter:
+    image: nginx/nginx-prometheus-exporter:latest
+    container_name: nginx_exporter
+    command:
+      - '--nginx.scrape-uri=http://nginx_server/nginx_status'
+    ports:
+      - "9113:9113"
+    depends_on:
+      - nginx_server
+    networks:
+      - webnet
+
+  varnish_exporter:
+    build:
+      context: ./varnish_exporter
+    container_name: varnish_exporter
+    volumes:
+      - varnish_storage:/var/lib/varnish
+    depends_on:
+      - varnish_server
+    networks:
+      - webnet
+    command: prometheus_varnish_exporter
+    ports:
+      - "9131:9131"
+
+  load_tester:
+    build:
+      context: ./load_tester
+    container_name: load_tester
+    depends_on:
+      - varnish_server
+    networks:
+      - webnet
+
+volumes:
+  varnish_storage:
+  grafana_data:
+
+networks:
+  webnet: 
+    name: webnet
