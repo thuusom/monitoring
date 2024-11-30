@@ -1,4 +1,14 @@
 {
+  "__inputs": [
+    {
+      "description": "",
+      "label": "Prometheus",
+      "name": "DS_PROMETHEUS",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus",
+      "type": "datasource"
+    }
+  ],  
   "annotations": {
     "list": [
       {
@@ -36,10 +46,7 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -105,10 +112,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "avg((rate(varnish_main_cache_hit{instance=~\"^($varnish_instance).*\"}[5m]) / (rate(varnish_main_cache_hit{instance=~\"^($varnish_instance).*\"}[5m]) + rate(varnish_main_cache_miss{instance=~\"^($varnish_instance).*\"}[5m]))))",
           "format": "time_series",
           "hide": false,
@@ -139,10 +143,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "decimals": 1,
@@ -202,10 +203,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(irate(varnish_main_client_req{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "interval": "15s",
@@ -221,10 +219,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "decimals": 1,
@@ -284,10 +279,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(irate(varnish_main_backend_req{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "interval": "15s",
@@ -303,10 +295,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "decimals": 1,
@@ -366,10 +355,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(irate(varnish_main_sessions_total{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "hide": false,
@@ -398,10 +384,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "decimals": 1,
@@ -461,10 +444,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(irate(varnish_main_cache_hit{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "interval": "15s",
@@ -480,10 +460,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "mappings": [
@@ -542,10 +519,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(varnish_main_vmods{instance=~\"^($varnish_instance).*\"})",
           "format": "time_series",
           "interval": "",
@@ -560,10 +534,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "mappings": [
@@ -626,10 +597,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "scalar(count(varnish_backend_up{instance=~\"^($varnish_instance).*\"} == 1))",
           "format": "time_series",
           "interval": "1m",
@@ -645,10 +613,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "mappings": [],
@@ -700,10 +665,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "scalar(count(varnish_backend_up{instance=~\"^($varnish_instance).*\"} == 0))",
           "format": "time_series",
           "interval": "1m",
@@ -719,10 +681,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "mappings": [
@@ -781,10 +740,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "min(varnish_main_uptime{instance=~\"^($varnish_instance).*\"})",
           "format": "time_series",
           "intervalFactor": 2,
@@ -812,10 +768,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "mappings": [
@@ -874,10 +827,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "varnish_version{instance=~\"^($varnish_instance).*\"}",
           "format": "table",
           "intervalFactor": 2,
@@ -904,10 +854,7 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1047,10 +994,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(irate(varnish_main_client_req{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "interval": "",
@@ -1061,10 +1005,7 @@
           "step": 60
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(irate(varnish_main_backend_req{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "interval": "",
@@ -1074,10 +1015,7 @@
           "step": 60
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(varnish_main_fetch_total{instance=~\"^($varnish_instance).*\"})",
           "format": "time_series",
           "intervalFactor": 2,
@@ -1090,10 +1028,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1209,10 +1144,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "rate(varnish_main_cache_hit{instance=~\"^($varnish_instance).*\"}[5m]) / (rate(varnish_main_cache_hit{instance=~\"^($varnish_instance).*\"}[5m]) + rate(varnish_main_cache_miss{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "hide": false,
@@ -1223,10 +1155,7 @@
           "step": 240
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "rate(varnish_main_cache_miss{instance=~\"^($varnish_instance).*\"}[5m]) / (rate(varnish_main_cache_hit{instance=~\"^($varnish_instance).*\"}[5m]) + rate(varnish_main_cache_miss{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "hide": false,
@@ -1254,10 +1183,7 @@
       "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1443,10 +1369,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(irate(varnish_main_s_resp_hdrbytes{instance=~\"^($varnish_instance).*\"}[5m]) + irate(varnish_main_s_resp_bodybytes{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "hide": false,
@@ -1457,10 +1380,7 @@
           "step": 60
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(irate(varnish_backend_beresp_hdrbytes{instance=~\"^($varnish_instance).*\"}[5m]) + irate(varnish_backend_beresp_bodybytes{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "hide": false,
@@ -1472,10 +1392,7 @@
           "step": 60
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(irate(varnish_backend_beresp_hdrbytes{instance=~\"^($varnish_instance).*\"}[5m]) + irate(varnish_backend_beresp_bodybytes{instance=~\"^($varnish_instance).*\"}[5m])) by (backend)",
           "format": "time_series",
           "intervalFactor": 2,
@@ -1488,10 +1405,7 @@
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "de5btibgjeakga"
-      },
+      "datasource": "${DS_PROMETHEUS}",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1649,10 +1563,7 @@
       "pluginVersion": "11.3.1",
       "targets": [
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(irate(varnish_main_n_expired{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "interval": "",
@@ -1663,10 +1574,7 @@
           "step": 240
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(irate(varnish_main_n_lru_moved{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "interval": "",
@@ -1676,10 +1584,7 @@
           "step": 240
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(irate(varnish_main_n_lru_nuked{instance=~\"^($varnish_instance).*\"}[5m]))",
           "format": "time_series",
           "interval": "",
@@ -1689,10 +1594,7 @@
           "step": 240
         },
         {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "de5btibgjeakga"
-          },
+          "datasource": "${DS_PROMETHEUS}",
           "expr": "sum(varnish_sma_g_bytes{type=\"s0\", instance=~\"^($varnish_instance).*\"})",
           "format": "time_series",
           "intervalFactor": 2,
@@ -1714,10 +1616,29 @@
     "list": [
       {
         "current": {
+          "selected": false,
+          "tags": [],
+          "text": "default",
+          "value": "default"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "datasource",
+        "multi": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "type": "datasource"
+      },
+      {
+        "current": {
           "text": "varnish1",
           "value": "varnish1"
         },
-        "datasource": "de5btibgjeakga",
+        "datasource": "${DS_PROMETHEUS}",
         "definition": "label_values(varnish_up,instance)",
         "includeAll": true,
         "label": "Instance",
