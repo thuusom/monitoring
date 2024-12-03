@@ -74,7 +74,7 @@ project-root/
 
    ```bash
    git clone https://github.com/your-repo/monitoring.git
-   cd monitoring
+   cd webmonitoring
    ```
 
 2. **Copy the .env.example file to .env and set the variables**:
@@ -95,7 +95,8 @@ project-root/
 4. **Access Services**:
    - **Apache**: [http://localhost:8081](http://localhost:8081)
    - **Nginx**: [http://localhost:8082](http://localhost:8082)
-   - **Varnish**: [http://localhost:8080](http://localhost:8080)
+   - **Varnish (nginx)**: [http://localhost:8080](http://localhost:8080)
+   - **Varnish (apache)**: [http://localhost:8080/apache/](http://localhost:8080/apache/)
    - **Prometheus**: [http://localhost:9090](http://localhost:9090)
    - **Grafana**: [http://localhost:3000](http://localhost:3000)  
      Default credentials: `admin / admin`
@@ -106,10 +107,15 @@ project-root/
 ## Preloaded Dashboards
 
 This setup includes preloaded Grafana dashboards for:
-- **Apache**
-- **Nginx**
+
 - **Varnish**
-- **System Metrics (cAdvisor)**
+![Varnish Dashboard Preview](./docs/varnish.png)
+
+- **Apache**
+![Apache Dashboard Preview](./docs/apache.png)
+
+- **Nginx**
+![Nginx Dashboard Preview](./docs/nginx.png)
 
 These dashboards are installed during setup and cannot be deleted. They serve as examples and starting points for further customization.
 
