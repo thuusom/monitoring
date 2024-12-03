@@ -73,7 +73,7 @@ project-root/
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/your-repo/monitoring.git
+   git clone https://github.com/thuusom/monitoring.git
    cd monitoring
    ```
 
