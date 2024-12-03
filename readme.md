@@ -40,6 +40,7 @@ The system works as follows:
 ### System Metrics
 - **cAdvisor**: Collects metrics about container resource usage.
   - [cAdvisor Documentation](https://github.com/google/cadvisor)
+  - NOT SETUP!
 
 ---
 
@@ -99,7 +100,6 @@ project-root/
    - **Prometheus**: [http://localhost:9090](http://localhost:9090)
    - **Grafana**: [http://localhost:3000](http://localhost:3000)  
      Default credentials: `admin / admin`
-   - **cAdvisor**: [http://localhost:8085](http://localhost:8085)
 
 ---
 
