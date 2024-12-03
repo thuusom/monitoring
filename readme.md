@@ -40,6 +40,7 @@ The system works as follows:
 ### System Metrics
 - **cAdvisor**: Collects metrics about container resource usage.
   - [cAdvisor Documentation](https://github.com/google/cadvisor)
+  - NOT SETUP!
 
 ---
 
@@ -73,14 +74,14 @@ project-root/
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/your-repo/monitoring.git
-   cd webmonitoring
+   git clone https://github.com/thuusom/monitoring.git
+   cd monitoring
    ```
 
 2. **Copy the .env.example file to .env and set the variables**:
    
    ```bash
-   cp .env.example .env
+   cp example.env .env
    ```
 
    This ensures that the docker containers are not colliding with other using the same names
@@ -100,7 +101,6 @@ project-root/
    - **Prometheus**: [http://localhost:9090](http://localhost:9090)
    - **Grafana**: [http://localhost:3000](http://localhost:3000)  
      Default credentials: `admin / admin`
-   - **cAdvisor**: [http://localhost:8085](http://localhost:8085)
 
 ---
 
