@@ -80,7 +80,7 @@ project-root/
 2. **Copy the .env.example file to .env and set the variables**:
    
    ```bash
-   cp .env.example .env
+   cp example.env .env
    ```
 
    This ensures that the docker containers are not colliding with other using the same names
