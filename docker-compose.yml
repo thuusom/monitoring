@@ -115,6 +115,16 @@ services:
     networks:
       - webnet
 
+  stream-monitor:
+    build:
+      context: ./stream-monitor
+    ports:
+      - "9118:9118"
+    # volumes:
+    #   - ./stream-monitor/streams.json:/app/streams.json:ro
+    networks:
+      - webnet
+
 volumes:
   varnish_storage:
   grafana_data:

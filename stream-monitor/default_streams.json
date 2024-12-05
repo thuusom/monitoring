@@ -1,0 +1,22 @@
+{
+    "general": {
+        "frequency": 10,
+        "log_level": "INFO"
+    },
+    "streams": [
+        {
+            "name": "dash",
+            "url": "https://cph-msl.akamaized.net/dash/live/2003285/test/manifest.mpd"
+        },
+        {
+            "name": "big",
+            "url": "https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd"
+        }
+    ],
+    "image_extraction": {
+        "enabled": true,
+        "output_path": "./images",
+        "width": 640,
+        "height": 480
+    }
+}
