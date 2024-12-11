@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stream Monitor</title>
+</head>
+<body>
+    <h1>Stream Monitor</h1>
+    <form method="get" action="/">
+        <label for="stream">Select Stream:</label>
+        <select name="stream" id="stream" onchange="this.form.submit()">
+            {% for stream in streams %}
+            <option value="{{ stream }}" {% if stream == selected %}selected{% endif %}>{{ stream }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    <h1>{{ selected }}</h1>
+    <img src="/images/{{ selected }}.jpg" width="640" height="480">
+    <h2>Manifest Details</h2>
+    <pre>{{ manifest_details }}</pre>
+    <h2>FFProbe Details</h2>
+    <pre>{{ ffprobe_details }}</pre>
+</body>
+</html>

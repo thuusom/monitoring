@@ -1,2 +1,4 @@
 .DS_Store
 .env
+stream-monitor/streams.json
+docker-compose.dev.yml

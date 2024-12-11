@@ -52,6 +52,7 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=dalvany-image-panel
     ports:
       - "3000:3000"
     depends_on:
@@ -112,6 +113,17 @@ services:
       context: ./load_tester
     depends_on:
       - varnish_server
+    networks:
+      - webnet
+
+  stream-monitor:
+    build:
+      context: ./stream-monitor
+    ports:
+      - "9118:9118"
+    # Add own list here or add a docker-compose.dev.yml file
+    # volumes:
+    #  - ./stream-monitor/streams.json:/app/streams.json:ro
     networks:
       - webnet
 

@@ -1,13 +1,15 @@
 
 # Monitoring with Prometheus & Grafana
 
-This project provides a starting point for setting up and monitoring a web stack using **Varnish** as a caching layer in front of **Apache** and **Nginx** backends. Monitoring is handled via **Prometheus**, with dashboards visualized in **Grafana**. Dashboards are preloaded and cannot be deleted, serving as examples for further customization. The project is designed to extend into a combined monitoring system for various components.
+This project provides a starting point for setting up and monitoring a web stack using **Varnish** as a caching layer in front of **Apache** and **Nginx** backends. Monitoring is handled via **Prometheus**, with dashboards visualized in **Grafana**.
+
+Dashboards are preloaded and cannot be deleted, serving as examples for further customization. The project is designed to extend into a combined monitoring system for various components.
 
 ## Architecture  
 
 The system works as follows:
 
-- The web servers (Apache and Nginx) and Varnish are monitored using exporters which feed into Prometheus. 
+- The web servers (Apache and Nginx) and Varnish are monitored using exporters which feed into Prometheus.
 - All metrics are scraped by Prometheus who pulls from the exporters and stores them in a time series database at a regular interval.
 - Grafana is used to visualize the metrics.
 - Alerts can be configured using Prometheus Alertmanager.
@@ -37,6 +39,13 @@ The system works as follows:
 - **Grafana**: Visualizes metrics with interactive dashboards.
   - [Grafana Documentation](https://grafana.com/oss/grafana)
 
+- **Stream Monitor**: Monitors live streams and extracts metrics.
+  - Combines stream probing, image extraction, and metrics export
+  - Uses FFprobe for stream analysis
+  - Provides Prometheus metrics endpoint
+  - Extracts thumbnails for visual monitoring
+  - Note: Thumbnail extraction may not work with DRM-protected content
+
 ### System Metrics
 - **cAdvisor**: Collects metrics about container resource usage.
   - [cAdvisor Documentation](https://github.com/google/cadvisor)
@@ -46,7 +55,7 @@ The system works as follows:
 
 ## Directory Structure
 
-```
+```bash
 project-root/
 ├── apache/
 │   ├── httpd.conf        # Apache server configuration
@@ -65,6 +74,11 @@ project-root/
 │   ├── nginx/            # Nginx web content
 ├── varnish_exporter/     # Subdirectory for Varnish exporter setup
 ├── docker-compose.yml    # Docker Compose configuration
+├── stream-monitor/
+│   ├── stream_monitor.py     # Stream monitoring service
+│   ├── default-streams.json  # Stream configuration
+│   ├── templates/            # Web interface templates
+│   ├── Dockerfile            # Container configuration
 ```
 
 ---
@@ -79,7 +93,7 @@ project-root/
    ```
 
 2. **Copy the .env.example file to .env and set the variables**:
-   
+
    ```bash
    cp example.env .env
    ```
@@ -101,6 +115,44 @@ project-root/
    - **Prometheus**: [http://localhost:9090](http://localhost:9090)
    - **Grafana**: [http://localhost:3000](http://localhost:3000)  
      Default credentials: `admin / admin`
+   - **Stream Monitor**: [http://localhost:9118](http://localhost:9118)
+
+5. **Configure Streams**:
+   The stream monitor uses a JSON configuration file. The default configuration can be overridden by mounting a custom file:
+
+   ```yaml
+   stream-monitor:
+     volumes:
+       - ./my-streams.json:/app/streams.json:ro
+   ```
+
+   Example streams.json format:
+
+   ```json
+   {
+     "general": {
+       "frequency": 10,
+       "log_level": "INFO"
+     },
+     "image_extraction": {
+       "enabled": true,
+       "output_path": "./images",
+       "width": 640,
+       "height": 360
+     },
+     "streams": [
+       {
+         "name": "stream1",
+         "url": "http://example.com/stream.m3u8",
+         "image_extraction": {
+           "enabled": true,
+           "width": 1280,
+           "height": 720
+         }
+       }
+     ]
+   }
+   ```
 
 ---
 
@@ -117,7 +169,15 @@ This setup includes preloaded Grafana dashboards for:
 - **Nginx**
 ![Nginx Dashboard Preview](./docs/nginx.png)
 
-These dashboards are installed during setup and cannot be deleted. They serve as examples and starting points for further customization.
+- **Stream Monitor**
+![Stream Monitor Dashboard Preview](./docs/stream-monitor.png)
+  - Stream status and uptime
+  - Video and audio bitrates
+  - Resolution and codec information
+  - Live thumbnails (where available)
+  - Stream format details
+
+These dashboards are installed during setup and cannot be deleted. They serve as examples and starting points for further customization. Changes made to the files will be available in grafana.
 
 ---
 
@@ -138,10 +198,13 @@ These dashboards are installed during setup and cannot be deleted. They serve as
 
 1. **Service Not Accessible**:
    - Check if the service is running:
+
      ```bash
      docker compose ps
      ```
+
    - Review logs:
+
      ```bash
      docker compose logs <service_name>
      ```
@@ -153,6 +216,7 @@ These dashboards are installed during setup and cannot be deleted. They serve as
 3. **Grafana Dashboards Not Loading**:
    - Ensure the provisioning directory is correctly mapped in `docker-compose.yml`.
    - Check Grafana logs:
+
      ```bash
      docker compose logs grafana
      ```
@@ -167,6 +231,6 @@ These dashboards are installed during setup and cannot be deleted. They serve as
 - [Prometheus Documentation](https://prometheus.io)
 - [Grafana Documentation](https://grafana.com/oss/grafana)
 - [cAdvisor Documentation](https://github.com/google/cadvisor)
+- [FFprobe Documentation](https://ffmpeg.org/ffprobe.html)
 
 ---
-
