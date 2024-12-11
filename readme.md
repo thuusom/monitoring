@@ -100,14 +100,14 @@ project-root/
 
    This ensures that the docker containers are not colliding with other using the same names
 
-3. **Start the Stack**:
+4. **Start the Stack**:
    Use `docker compose` to build and run all services:
 
    ```bash
    docker compose up --build -d
    ```
 
-4. **Access Services**:
+5. **Access Services**:
    - **Apache**: [http://localhost:8081](http://localhost:8081)
    - **Nginx**: [http://localhost:8082](http://localhost:8082)
    - **Varnish (nginx)**: [http://localhost:8080](http://localhost:8080)
@@ -117,8 +117,8 @@ project-root/
      Default credentials: `admin / admin`
    - **Stream Monitor**: [http://localhost:9118](http://localhost:9118)
 
-5. **Configure Streams**:
-   The stream monitor uses a JSON configuration file. The default configuration can be overridden by mounting a custom file:
+6. **Configure Streams**:
+   The stream monitor uses a JSON configuration file. The default configuration can be overridden by mounting a custom file. f.ex. docker-compose-dev.yml:
 
    ```yaml
    stream-monitor:
@@ -154,6 +154,11 @@ project-root/
    }
    ```
 
+   Use `docker compose` to build and run all services with the overriding yml file:
+
+   ```bash
+   docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+   ```
 ---
 
 ## Preloaded Dashboards
